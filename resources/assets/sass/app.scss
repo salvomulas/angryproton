@@ -1,8 +1,8 @@
 // Read the custom variables for the bootstrap framework
 // This NEEDS to be done FIRST
 @import "variables.scss";
+@import "jumbotron.scss";
+@import "typography.scss";
 
 // Import the main bootstrap SASS
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-
