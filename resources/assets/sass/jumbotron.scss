@@ -2,7 +2,7 @@
 
   @include gradient-vertical ($brand-primary, lighten($brand-primary, 18%));
 
-  h1, h2, h3, p, a {
+  h1, h2, h3, h4, p, a {
     padding-bottom: 20px;
     color: $gray-lighter;
   }

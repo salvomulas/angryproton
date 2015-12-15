@@ -6,7 +6,7 @@
 
     @section ('body')
 
-            <!-- Jumbotron Container -->
+    <!-- Jumbotron Container -->
     <div class="jumbotron">
         <div class="container">
 
@@ -93,11 +93,14 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">Bier saufen</h4>
+
                             <p class="list-group-item-text">Prof. Dr. Mulas | noch <strong>10 Plätze</strong> frei</p>
                         </a>
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">Die Kunst des Sarkasmus</h4>
-                            <p class="list-group-item-text">Prof. Dr. Indermühle | noch <strong>2 Plätze</strong> frei</p>
+
+                            <p class="list-group-item-text">Prof. Dr. Indermühle | noch <strong>2 Plätze</strong> frei
+                            </p>
                         </a>
                     </div>
                 </div>
@@ -108,11 +111,14 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">Whiskey geniessen</h4>
+
                             <p class="list-group-item-text">Prof. Dr. Denger | noch <strong>12 Plätze</strong> frei</p>
                         </a>
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">Jaja schrib mer es Mail!</h4>
-                            <p class="list-group-item-text">Prof. Dr. Produktion | noch <strong>4 Plätze</strong> frei</p>
+
+                            <p class="list-group-item-text">Prof. Dr. Produktion | noch <strong>4 Plätze</strong> frei
+                            </p>
                         </a>
                     </div>
                 </div>

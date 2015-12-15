@@ -15,12 +15,13 @@ use App\Http\Controllers\Controller;
 class PublicController extends Controller
 {
     /**
-     * Display the home page of the application.
+     * Display the landing page of the application.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $this->middleware('guest');
         return view ('public.home');
     }
 

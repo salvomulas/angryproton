@@ -24,6 +24,12 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
+     * Sets the redirect path to prompt the user to its dashboard after login.
+     * @var string
+     */
+    protected $redirectPath = '/dashboard';
+
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
@@ -42,7 +48,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'firstName' => 'required|max:255',
+            'lastName' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -57,7 +64,8 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'firstName' => $data['firstName'],
+            'lastName' => $data['lastName'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

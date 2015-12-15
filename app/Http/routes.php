@@ -16,6 +16,39 @@
  **************************************************************************
  */
 Route::get ('/', [
-    'as' => 'home',
+    'as'   => 'home',
     'uses' => 'PublicController@index'
 ]);
+
+
+/*
+ * User specific routes
+ * **************************************************************************
+ */
+Route::get('/dashboard', [
+    'as'    => 'dashboard',
+    'uses'  => 'UserController@index'
+]);
+
+/*
+ * Routes for authentication purposes
+ * **************************************************************************
+ */
+Route::controllers ([
+    'auth'     => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+
+Route::get ('password/email', 'Auth\PasswordController@getEmail');
+Route::post ('password/email', 'Auth\PasswordController@postEmail');
+Route::get ('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post ('password/reset', 'Auth\PasswordController@postReset');
+
+
+/*
+ * Routes for debugging purposes
+ * **************************************************************************
+ */
+Route::get ('/test', function () {
+    return view ('auth.password');
+});

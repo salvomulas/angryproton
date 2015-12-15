@@ -11,8 +11,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+    AuthorizableContract,
+    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['firstName', 'lastName', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,4 +36,24 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Returns the Gravatar URL to display a profile picture
+     * @return string
+     */
+    public function getGravatarAttribute ()
+    {
+        $hash = md5 (strtolower (trim ($this->attributes['email'])));
+        return "http://www.gravatar.com/avatar/$hash?s=150";
+    }
+
+    /**
+     * Returns the users full name by combining the first and last name
+     * @return string
+     */
+    public function getFullNameAttribute ()
+    {
+        return ($this->attributes['firstName'].' '. $this->attributes['lastName']);
+    }
+
 }

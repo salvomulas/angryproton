@@ -5757,7 +5757,7 @@ button.close {
   background-image: linear-gradient(to bottom, #DA7223 0%, #e8a471 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFDA7223', endColorstr='#FFE8A471', GradientType=0); }
-  .jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron p, .jumbotron a {
+  .jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4, .jumbotron p, .jumbotron a {
     padding-bottom: 20px;
     color: #eeeeee; }
   .jumbotron h1 > i {

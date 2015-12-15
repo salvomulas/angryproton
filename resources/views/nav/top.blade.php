@@ -22,12 +22,12 @@
                 @if (Auth::check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-user"></i> Benutzername <span class="caret"></span></a>
+                           aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->firstName ." ". Auth::user()->lastName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#"><i class="fa fa-gear"></i> Einstellungen</a></li>
                             <li><a href="#"><i class="fa fa-bell"></i> Benachrichtigungen</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-lock"></i> Ausloggen</a></li>
+                            <li><a href="{{ url ('/auth/logout') }}"><i class="fa fa-lock"></i> Ausloggen</a></li>
                         </ul>
                     </li>
 
@@ -35,12 +35,12 @@
                 @else
                     <li>
                         <p class="navbar-btn">
-                            <a href="#" class="btn btn-default">Einloggen</a>
+                            <a href="{{ url('/auth/login') }}" class="btn btn-default">Einloggen</a>
                         </p>
                     </li>
                     <li>
                         <p class="navbar-btn">
-                            <a href="#" class="btn btn-primary">Registrieren</a>
+                            <a href="{{ url ('/auth/register/') }}" class="btn btn-primary">Registrieren</a>
                         </p>
                     </li>
                 @endif
