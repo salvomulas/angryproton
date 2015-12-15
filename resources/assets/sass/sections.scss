@@ -1,0 +1,77 @@
+//
+// ---- STYLING SECTIONS ----
+//
+
+@media (min-width: $screen-md-min) {
+
+  .border-left {
+    border-left: 1px solid $gray-lighter;
+    padding-left: 30px;
+  }
+
+  .border-right {
+    border-right: 1px solid $gray-lighter;
+    padding-right: 30px;
+  }
+
+  .opposed-border-left {
+    padding-left: 30px;
+  }
+
+  .opposed-border-right {
+    padding-right: 30px;
+    text-align: right;
+  }
+}
+
+//
+// ---- SECTION CLASSES ----
+//
+
+.highlight {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: lighten($brand-primary, 40px);
+
+  h1,h2,h3,h4,h5 {
+    color: $gray-darker;
+  }
+}
+
+.courses {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+//
+// ---- FOOTER CLASS ----
+//
+
+footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: $gray-dark;
+  border-top: 8px solid $brand-primary;
+  color: $gray-lighter;
+
+  h3 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $brand-primary;
+  }
+
+  ul.sitemap {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}

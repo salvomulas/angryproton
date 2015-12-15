@@ -26,6 +26,6 @@ elixir(function (mix) {
     mix.copy(paths.fa + "css/font-awesome.css", "public/css/font-awesome.css");
     mix.copy(paths.bootstrap + "fonts/", 'public/fonts/');
     mix.browserSync({
-        proxy: 'localhost/angryproton/public'
+        proxy: 'angryproton.dev'
     });
 });

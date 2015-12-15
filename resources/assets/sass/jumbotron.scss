@@ -1,5 +1,26 @@
 .jumbotron {
+
+  @include gradient-vertical ($brand-primary, lighten($brand-primary, 18%));
+
   h1, h2, h3, p, a {
     padding-bottom: 20px;
+    color: $gray-lighter;
   }
+
+  h1 > i {
+    color: $gray-lighter;
+  }
+
+  input {
+    background-color: lighten($brand-primary, 30%);
+    border: 1px solid $gray-lighter;
+    height: 50px;
+    font-size: $font-size-large;
+
+    &:focus {
+      border: 2px solid $brand-primary;
+    }
+
+  }
+
 }
