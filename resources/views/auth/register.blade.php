@@ -9,8 +9,12 @@
             <!-- Jumbotron Container -->
     <div class="jumbotron">
         <div class="container">
-
-            <h3>Eine Welt voller Wissen erwartet dich!</h3>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <h3>Willkommen bei AngryProton!</h3>
+            </div>
+            <div class="col-md-4 hidden-sm hidden-xs text-right">
+                <i class="fa fa-4x fa-user"></i>
+            </div>
 
         </div>
     </div>

@@ -45,6 +45,12 @@ Route::post ('password/email', 'Auth\PasswordController@postEmail');
 Route::get ('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post ('password/reset', 'Auth\PasswordController@postReset');
 
+/*
+ * Routes for resources
+ * **************************************************************************
+ */
+Route::resource ('institutions', 'InstitutionController');
+Route::resource ('courses', 'CourseController');
 
 /*
  * Routes for debugging purposes
@@ -52,4 +58,8 @@ Route::post ('password/reset', 'Auth\PasswordController@postReset');
  */
 Route::get ('/test', function () {
     return view ('auth.password');
+});
+
+Route::get ('/403', function () {
+    return view ('errors.403');
 });

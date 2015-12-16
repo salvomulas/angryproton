@@ -5760,6 +5760,12 @@ button.close {
   .jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4, .jumbotron p, .jumbotron a {
     padding-bottom: 20px;
     color: #eeeeee; }
+  .jumbotron i.fa-4x {
+    color: #DA7223;
+    font-size: 5em; }
+  .jumbotron i.fa-5x {
+    color: #DA7223;
+    font-size: 9em; }
   .jumbotron h1 > i {
     color: #eeeeee; }
   .jumbotron input {
@@ -5803,6 +5809,16 @@ i.fa {
   padding-bottom: 20px;
   margin-top: 20px;
   margin-bottom: 20px; }
+
+.navbar-default {
+  border-bottom: 2px solid #333333;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0; }
+
+@media (min-width: 768px) {
+  .navbar .btn {
+    margin-left: 10px; } }
 
 footer {
   margin-top: 20px;

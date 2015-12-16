@@ -48,6 +48,25 @@
 }
 
 //
+// ---- NAVIGATION CLASSES ----
+//
+
+.navbar-default {
+  border-bottom: 2px solid $gray-dark;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+@media (min-width: $screen-sm-min) {
+  .navbar {
+    .btn {
+      margin-left: 10px;
+    }
+  }
+}
+
+//
 // ---- FOOTER CLASS ----
 //
 

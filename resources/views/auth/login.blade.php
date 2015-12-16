@@ -9,12 +9,15 @@
             <!-- Jumbotron Container -->
     <div class="jumbotron">
         <div class="container">
-
-            <h3>Bitte logge dich ein</h3>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <h3>Bitte logge dich ein</h3>
+            </div>
+            <div class="col-md-4 hidden-sm hidden-xs text-right">
+                <i class="fa fa-4x fa-sign-in"></i>
+            </div>
 
         </div>
     </div>
-
     <!-- Login Form container -->
     <div class="container">
         <div class="col-md-6 col-md-offset-3">

@@ -1,9 +1,9 @@
 @extends ('templates.error')
 
 @section ('code')
-    503
+403
 @endsection
 
 @section ('message')
-    Wir sind gleich wieder da!
+    Der Zugriff wurde verweigert!
 @endsection

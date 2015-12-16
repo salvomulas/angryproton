@@ -1,9 +1,9 @@
 @extends ('templates.error')
 
 @section ('code')
-    503
+    404
 @endsection
 
 @section ('message')
-    Wir sind gleich wieder da!
+    Die Seite wurde nicht gefunden!
 @endsection
