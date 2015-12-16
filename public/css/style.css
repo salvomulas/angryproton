@@ -5773,6 +5773,9 @@ button.close {
 i.fa {
   color: #DA7223; }
 
+.active i.fa {
+  color: #fff; }
+
 @media (min-width: 992px) {
   .border-left {
     border-left: 1px solid #eeeeee;
@@ -5818,5 +5821,8 @@ footer {
     footer ul.sitemap li {
       margin-top: 10px;
       margin-bottom: 10px; }
+
+.img-inline {
+  display: inline-block; }
 
 /*# sourceMappingURL=style.css.map */

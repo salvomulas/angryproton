@@ -1,3 +1,11 @@
+//
+// ---- FONT AWESOME CUSTOM STYLING ----
+//
+
 i.fa {
   color: $brand-primary;
+}
+
+.active i.fa {
+  color: #fff;
 }

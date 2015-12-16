@@ -17,6 +17,12 @@
             </div>
             <div class="col-md-4">
                 <h3>Folge uns</h3>
+                <i class="fa fa-2x fa-facebook-official"></i>
+                <i class="fa fa-2x fa-twitter-square"></i>
+                <i class="fa fa-2x fa-github-square"></i>
+                <i class="fa fa-2x fa-google-plus-square"></i>
+                <i class="fa fa-2x fa-linkedin-square"></i>
+                <i class="fa fa-2x fa-xing-square"></i>
             </div>
         </div>
     </div>

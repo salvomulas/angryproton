@@ -21,7 +21,6 @@ class PublicController extends Controller
      */
     public function index()
     {
-        $this->middleware('guest');
         return view ('public.home');
     }
 

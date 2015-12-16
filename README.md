@@ -21,3 +21,16 @@ Mit Composer alle Abhängigkeiten installieren
 ```sh
 $ composer install
 ```
+
+.env File erzeugen und entsprechend konfigurieren
+
+```sh
+$ touch .mv
+```
+
+Datenbank migrieren und seeden
+
+```sh
+$ php artisan migrate
+$ php artisan db:seed
+```

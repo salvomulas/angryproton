@@ -16,8 +16,9 @@
  **************************************************************************
  */
 Route::get ('/', [
-    'as'   => 'home',
-    'uses' => 'PublicController@index'
+    'as'         => 'home',
+    'middleware' => 'guest',
+    'uses'       => 'PublicController@index'
 ]);
 
 
@@ -25,9 +26,9 @@ Route::get ('/', [
  * User specific routes
  * **************************************************************************
  */
-Route::get('/dashboard', [
-    'as'    => 'dashboard',
-    'uses'  => 'UserController@index'
+Route::get ('/dashboard', [
+    'as'   => 'dashboard',
+    'uses' => 'UserController@index'
 ]);
 
 /*
