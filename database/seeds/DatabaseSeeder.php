@@ -14,7 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        // Calls the seeder in the correct order to populate the database with fake data
+        $this->call(UsersSeeder::class);
+        $this->call(InstitutionsSeeder::class);
+        $this->call(CoursesSeeder::class);
 
         Model::reguard();
     }
