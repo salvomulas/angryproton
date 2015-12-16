@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the courses resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $courses = Course::all ();
+        return view ('public.courses')->with ('courses', $courses);
     }
 
     /**
@@ -48,7 +49,8 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::findOrFail ($id);
+        dd ($course);
     }
 
     /**
