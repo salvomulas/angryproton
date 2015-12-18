@@ -59,8 +59,12 @@ class ACLSeeder extends Seeder
         // Establish basic relationships
         // *****************************
 
-        // Teacher for courses, moderator for courses AND institutions
+        // Teacher for courses
+        Role::findOrFail (1)->grantPermission (Permission::findOrFail (1));
 
+        // Moderator for courses and institutions
+        Role::findOrFail (1)->grantPermission (Permission::findOrFail (1));
+        Role::findOrFail (2)->grantPermission (Permission::findOrFail (2));
 
     }
 }

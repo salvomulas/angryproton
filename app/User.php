@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use \App\Role;
 
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
@@ -35,7 +36,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'isAdmin'];
 
     /**
      * Returns the Gravatar URL to display a profile picture
@@ -54,6 +55,30 @@ class User extends Model implements AuthenticatableContract,
     public function getFullNameAttribute ()
     {
         return ($this->attributes['firstName'].' '. $this->attributes['lastName']);
+    }
+
+    /**
+     * Establish the belongsToMany relationship to the Roles model
+     * @return mixed
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Checks if the user has the given role
+     *
+     * @param $role
+     * @return mixed
+     */
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+        // Intersection removes all items which are supplied from the roles() method
+        return !! $role->intersect($this->roles)->count();;
     }
 
 }
