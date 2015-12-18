@@ -23,7 +23,7 @@ class AssignForeignKeys extends Migration
                 ->references ('id')
                 ->on ('institutions')
                 ->onDelete ('cascade')
-                ->onUpdate ('cascade');;
+                ->onUpdate ('cascade');
         });
     }
 
@@ -34,9 +34,6 @@ class AssignForeignKeys extends Migration
      */
     public function down()
     {
-        Schema::table ('courses', function (Blueprint $table) {
-            $table->dropForeign ('courses_assignedOwner_foreign');
-            $table->dropForeign ('courses_assignedInstitution_foreign');
-        });
+        // Nothing to reverse as the table will be dropped within another migrations down() method
     }
 }

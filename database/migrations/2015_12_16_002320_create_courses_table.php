@@ -35,6 +35,8 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
+        // Disable Foreign Key Checks
+        DB::statement ('SET FOREIGN_KEY_CHECKS=0;');
         Schema::drop ('courses');
     }
 }
