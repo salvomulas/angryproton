@@ -50,7 +50,7 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail ($id);
-        dd ($course);
+        return view ('public.CourseDetail')->with ('course', $course);
     }
 
     /**
