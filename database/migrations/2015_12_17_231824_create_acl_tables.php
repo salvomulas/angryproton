@@ -43,7 +43,6 @@ class CreateAclTables extends Migration
                 ->on ('roles')
                 ->onDelete ('cascade');
 
-            $table->primary(['permission_id', 'role_id']);
         });
 
         // Creates the allocation table to assign roles to a user
