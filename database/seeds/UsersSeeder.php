@@ -21,24 +21,28 @@ class UsersSeeder extends Seeder
             'lastName'  => 'Mustermann',
             'email'     => 'user@angryproton.ch',
             'password'  => bcrypt ('secret'),
+            'isAdmin'   => 0,
         ]);
         DB::table ('users')->insert ([
             'firstName' => 'Hans',
             'lastName'  => 'Dozent',
             'email'     => 'teacher@angryproton.ch',
             'password'  => bcrypt ('secret'),
+            'isAdmin'   => 0,
         ]);
         DB::table ('users')->insert ([
             'firstName' => 'Gregor',
             'lastName'  => 'Schulleiter',
             'email'     => 'manager@angryproton.ch',
             'password'  => bcrypt ('secret'),
+            'isAdmin'   => 0,
         ]);
         DB::table ('users')->insert ([
             'firstName' => 'Bob',
             'lastName'  => 'Gottkomplex',
             'email'     => 'root@angryproton.ch',
             'password'  => bcrypt ('secret'),
+            'isAdmin'   => 1,
         ]);
     }
 }
