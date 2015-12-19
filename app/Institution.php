@@ -14,4 +14,20 @@ class Institution extends Model
      */
     protected $fillable = ['name', 'slug', 'address', 'city', 'zip', 'country'];
 
+    /*
+     *
+     *  relationship with the User Class
+     *
+     */
+    public function user(){
+        return $this->belongsTo('User','assignedOwner');
+    }
+
+    /**
+     *  Relationship with Courses
+     */
+    public function courses(){
+        return $this->hasMany('Course','assignedInstitution');
+    }
+
 }

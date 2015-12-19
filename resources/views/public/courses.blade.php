@@ -34,7 +34,8 @@
         </div>
 
         <div class="col-md-6">
-
+            neuer Kurs anlegen <a href="{{action('CourseController@create' )}}"<i
+                                            class="fa fa-plus-circle"></i></a>
             @if (count($courses) > 0)
 
                 <div class="table-responsive">

@@ -81,4 +81,10 @@ class User extends Model implements AuthenticatableContract,
         return !! $role->intersect($this->roles)->count();;
     }
 
+    /**
+     *  Relationship with Courses
+     */
+    public function courses(){
+        return $this->hasMany('Course','assignedOwner');
+    }
 }
