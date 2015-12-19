@@ -57,7 +57,8 @@ Route::resource ('courses', 'CourseController');
  * **************************************************************************
  */
 Route::get ('/test', function () {
-    if (Gate::allows('teacher')) {
+    Auth::loginUsingId(1);
+    if (Gate::allows('manage_courses')) {
         return "Es läuft";
     }
 });

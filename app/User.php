@@ -81,6 +81,11 @@ class User extends Model implements AuthenticatableContract,
         return !! $role->intersect($this->roles)->count();;
     }
 
+    public function hasSuperpowers ()
+    {
+        return !! $this->isAdmin;
+    }
+
     /**
      *  Relationship with Courses
      */

@@ -28,6 +28,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        // Grants complete access if admin
+        $gate->before(function ($user, $ability) {
+            return $user->hasSuperpowers();
+        });
+
         // Wrapped within try/catch to avoid migration problems in testing
         try {
 
@@ -38,19 +43,15 @@ class AuthServiceProvider extends ServiceProvider
                 });
             }
 
-            // Get owner of a course and define permission to modify
-            $gate->define('update-course', function ($user, $course) {
-                return $user->id === $course->assignedOwner;
-            });
-
-            // Get owner of an institution and define permission to modify
-            //$gate->define('update-institution', function ($user, $course) {
-            //    return $user->id === $course->assignedOwner;
-            //});
-
         } catch (QueryException $e) {
             return false;
         }
+
+        // Get owner of a course and define permission to modify
+        $gate->define('update-course', function ($user, $course) {
+            return $user->id === $course->assignedOwner;
+        });
+
     }
 
     protected function getPermissions()
