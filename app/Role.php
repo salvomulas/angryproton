@@ -8,7 +8,7 @@ use App\Permission;
 class Role extends Model
 {
     /**
-     * Establish the belongsToMany relationship to the Permission model
+     * Establish the belongsToMany relationship to the Permission model to return all permissions
      *
      * @return mixed
      */

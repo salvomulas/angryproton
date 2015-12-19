@@ -57,7 +57,9 @@ Route::resource ('courses', 'CourseController');
  * **************************************************************************
  */
 Route::get ('/test', function () {
-    return view ('auth.password');
+    if (Gate::allows('teacher')) {
+        return "Es läuft";
+    }
 });
 
 Route::get ('/403', function () {

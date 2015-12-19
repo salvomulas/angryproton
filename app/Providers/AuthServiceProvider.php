@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
             // Get permissions from the database
             foreach ($this->getPermissions() as $permission) {
                 $gate->define($permission->name, function ($user) use ($permission) {
-                    $user->hasRole($permission->roles);
+                    return $user->hasRole($permission->roles);
                 });
             }
 
@@ -44,9 +44,9 @@ class AuthServiceProvider extends ServiceProvider
             });
 
             // Get owner of an institution and define permission to modify
-            $gate->define('update-institution', function ($user, $course) {
-                return $user->id === $course->assignedOwner;
-            });
+            //$gate->define('update-institution', function ($user, $course) {
+            //    return $user->id === $course->assignedOwner;
+            //});
 
         } catch (QueryException $e) {
             return false;
