@@ -24,8 +24,6 @@ class CreateCoursesTable extends Migration
             $table->timestamps ();
         });
 
-
-
     }
 
     /**

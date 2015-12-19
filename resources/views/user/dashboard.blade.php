@@ -32,11 +32,11 @@
             </div>
             <div class="col-md-9">
                 <!-- Dashboard content -->
-                @can('teacher')
-                    <h3>ACL: You can manage courses</h3>
+                @can('update-institution')
+                <h3>ACL: You can manage courses</h3>
                 @endcan
                 @can('moderator')
-                    <h3>ACL: You can manage institutions</h3>
+                <h3>ACL: You can manage institutions</h3>
                 @endcan
             </div>
         </div>

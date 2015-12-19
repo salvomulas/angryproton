@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use \App\Role;
+use App\Role;
 
 class Permission extends Model
 {
@@ -14,4 +14,5 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+    
 }

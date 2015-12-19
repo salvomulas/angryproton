@@ -30,11 +30,24 @@ class AuthServiceProvider extends ServiceProvider
 
         // Wrapped within try/catch to avoid migration problems in testing
         try {
+
+            // Get permissions from the database
             foreach ($this->getPermissions() as $permission) {
                 $gate->define($permission->name, function ($user) use ($permission) {
                     $user->hasRole($permission->roles);
                 });
             }
+
+            // Get owner of a course and define permission to modify
+            $gate->define('update-course', function ($user, $course) {
+                return $user->id === $course->assignedOwner;
+            });
+
+            // Get owner of an institution and define permission to modify
+            $gate->define('update-institution', function ($user, $course) {
+                return $user->id === $course->assignedOwner;
+            });
+
         } catch (QueryException $e) {
             return false;
         }
