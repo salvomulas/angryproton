@@ -110,15 +110,78 @@ class CourseController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * TODO only course owner should be allowed to do this.
+     * TODO This should send a mail to all participants who signed up.
+     * TODO Should not be possible after the owner confirmed the course
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+
+        $course = Course::findOrFail($id);
+
+        $course->delete();
+        return redirect()->action('CourseController@index');
+        \Session::flash('flash_message', "Der Kurs wurde erfolgreich gelöscht");
+
     }
 
+    /**
+     * The owner of the course can confirm it,
+     * TODO send an email to all participants
+     * TODO send bill to the owner
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function confirm($id)
+    {
+        #TODO only the course owner should be allowed to do this.
+        $course = Course::findOrFail($id);
+        $course->confirmed=true;
+        $course->save();
+
+        \Session::flash('flash_message', "Der Kurs wurde erfolgreich bestätigt");
+        return redirect()->action('CourseController@show',[$course->id]);
+    }
+
+    /**
+     *TODO this should only be possible if the user is logged in and not the course owner
+     *TODO this should only be allowed if max participants ahs not been reached.
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function signup($id)
+    {
+        $course = Course::findOrFail($id);
+        $course->participants()->attach(Auth::user());
+        \Session::flash('flash_message', "Du wurdest erfolgreich zum Kurs angemeldet");
+        return redirect()->action('CourseController@show',[$course->id]);
+
+    }
+
+    /**
+     * Cancel a Subscription
+     * TODO this should only be possible if the course is not confirmed and the User is logged in
+     * and signed up
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     */
+    public function cancel($id)
+    {
+        $course = Course::findOrFail($id);
+        $course->participants()->detach(Auth::user());
+
+        \Session::flash('flash_message', "Du wurdest erfolgreich vom Kurs abgemeldet");
+        return redirect()->action('CourseController@show',[$course->id]);
+
+    }
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     */
     private function storeORUpdate(Request $request, Course $course){
 
         $this->validate($request,[
@@ -127,7 +190,8 @@ class CourseController extends Controller
             'description' => 'required|min:10',
             'price'=>'numeric|required|min:0|max:9999',
             'startDate' =>'required|date',
-            'duration' => 'required|min:0|max:480|integer'
+            'duration' => 'required|min:0|max:480|integer',
+            'participantNum' => 'required|min:1|max:50|Integer'
         ]);
 
 
@@ -145,6 +209,7 @@ class CourseController extends Controller
         $course->price = $request->price;
         $course->startDate = $request->startDate;
         $course->duration = $request->duration;
+        $course->participantNum =$request->participantNum;
         $course->user()->associate(Auth::user());
 
         if ($course->save()){
@@ -159,4 +224,5 @@ class CourseController extends Controller
         }
 
     }
+
 }

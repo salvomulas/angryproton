@@ -52,6 +52,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $course->assignedOwner;
         });
 
+        //allow signup to a course
+       //$gate->define('signup',function(){
+            #$user->id != $course-assignedOwner;
+       //     return true;
+       // });
+
     }
 
     protected function getPermissions()

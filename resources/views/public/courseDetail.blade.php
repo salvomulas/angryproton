@@ -21,36 +21,52 @@
     </div>
 
     <div class="container">
-        @if (Session::has('flash_message'))
-            <div class="alert alert-success">{{Session::get('flash_message')}}
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            </div>
-            <script>
-                $('div.alert').delay(4000).slideUp(300);
-            </script>
-        @endif
+        @include('includes.flash')
         <div class="col-md-6">
-            Kurs editieren <a href="{{ action( 'CourseController@edit',[$course->id] ) }}"<i
+            <!-- TODO only show button if your allowed to edit -->
+                Kurs editieren <a href="{{ action( 'CourseController@edit',[$course->id] ) }}"<i
                     class="fa fa-pencil-square"></i></a>
-
             <div class="table-responsive">
                 <table class="table table-hover table-striped">
                     <tbody>
                         <tr>
-                            <th>Kursname</th>
-                            <th>{{ $course->courseName }}</th>
+                            <td>Kursname</td>
+                            <td>{{ $course->courseName }}</td>
                         </tr>
-                            <th>Beschreibung</th>
-                            <th>{{ $course->description }}</th>
+                            <td>Beschreibung</td>
+                            <td>{{ $course->description }}</td>
                         </tr>
-                            <th>Startdatum</th>
-                            <th>{{ $course->startDate }}</th>   
+                            <td>Startdatum</td>
+                            <td>{{ $course->startDate }}</td>
                         </tr>                            
-                            <th>Dauer</th>
-                            <th>{{ $course->duration }}</th>   
+                            <td>Dauer</td>
+                            <td>{{ $course->duration }}</td>
                         </tr>
-                            <th>Preis</th>
-                            <th>{{ $course->price }}</th>                      
+                            <td>Preis</td>
+                            <td>{{ $course->price }}</td>
+                        </tr>
+                        </tr>
+                            <td>
+                                <!-- TODO need to implement ACL's so only the correct people may see the corresponding buttons-->
+
+                                {!! Form::open(array('url' => action('CourseController@confirm',[$course->id]))) !!}
+                                {!! Form::submit('Bestätigen',["class"=>"btn btn-default"]) !!}
+                                {!! Form::close() !!}
+
+                                {!! Form::open(array('url' => action('CourseController@signup',[$course->id]))) !!}
+                                {!! Form::submit('Einschreiben',["class"=>"btn btn-default"]) !!}
+                                {!! Form::close() !!}
+                            </td>
+                            <td>
+
+                                {!! Form::open(array('url' => action('CourseController@destroy',[$course->id]),'method'=>'delete')) !!}
+                                {!! Form::submit('Absagen',["class"=>"btn btn-warning"]) !!}
+                                {!! Form::close() !!}
+
+                                {!! Form::open(array('url' => action('CourseController@cancel',[$course->id]))) !!}
+                                {!! Form::submit('Abmelden',["class"=>"btn btn-warning"]) !!}
+                                {!! Form::close() !!}
+                            </td>
                         </tr>
                     </tbody>
                 </table>

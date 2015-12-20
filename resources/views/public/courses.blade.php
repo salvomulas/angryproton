@@ -22,7 +22,14 @@
     </div>
 
     <div class="container">
-
+        @if (Session::has('flash_message'))
+            <div class="alert alert-success">{{Session::get('flash_message')}}
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            </div>
+            <script>
+                $('div.alert').delay(4000).slideUp(300);
+            </script>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="well">
@@ -34,8 +41,10 @@
         </div>
 
         <div class="col-md-6">
-            neuer Kurs anlegen <a href="{{action('CourseController@create' )}}"<i
+
+                neuer Kurs anlegen <a href="{{action('CourseController@create' )}}"<i
                                             class="fa fa-plus-circle"></i></a>
+
             @if (count($courses) > 0)
 
                 <div class="table-responsive">

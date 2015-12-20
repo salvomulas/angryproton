@@ -23,3 +23,7 @@
     {!! Form::text('duration',$course->duration,['class'=>'form-control']) !!}
     in Minuten
 </div>
+<div class="form-group">
+    {!! Form::label('participantNum',"Maximal Anzahl Teilnehmer") !!}
+    {!! Form::text('participantNum',$course->participantNum,['class'=>'form-control']) !!}
+</div>

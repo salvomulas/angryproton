@@ -45,12 +45,22 @@ Route::post ('password/email', 'Auth\PasswordController@postEmail');
 Route::get ('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post ('password/reset', 'Auth\PasswordController@postReset');
 
+
+/*
+ * Routes to signup for courses
+ * TODO I don't know why I can't use post or patch here. but if I do it says its the wrong method.
+ */
+Route::any ('courses/{id}/signup', 'CourseController@signup');
+Route::any ('courses/{id}/cancel', 'CourseController@cancel');
+Route::any ('courses/{id}/confirm', 'CourseController@confirm');
+
 /*
  * Routes for resources
  * **************************************************************************
  */
 Route::resource ('institutions', 'InstitutionController');
 Route::resource ('courses', 'CourseController');
+
 
 /*
  * Routes for debugging purposes

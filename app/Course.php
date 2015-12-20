@@ -19,4 +19,9 @@ class Course extends Model
     public function user(){
        return $this->belongsTo('App\User','assignedOwner');
     }
+
+    public function participants()
+    {
+        return $this->belongsToMany('App\User','user_course');
+    }
 }

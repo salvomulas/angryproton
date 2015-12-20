@@ -87,9 +87,18 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+     *  courses I lead.
      *  Relationship with Courses
      */
-    public function courses(){
+    public function ownedCourses(){
         return $this->hasMany('Course','assignedOwner');
+    }
+
+    /**
+     *  courses I participate
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function courses(){
+        return $this->belongsToMany('courses');
     }
 }
