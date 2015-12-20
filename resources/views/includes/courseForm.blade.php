@@ -7,7 +7,7 @@
     {!! Form::text('courseName',$course->courseName,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('description',"Kursbeschreibung") !!}
+    {!! Form::label('description',"Beschreibung") !!}
     {!! Form::textarea('description',$course->description,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
@@ -15,7 +15,7 @@
     {!! Form::text('price',$course->price,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('startDate',"Start Datum") !!}
+    {!! Form::label('startDate',"Startdatum") !!}
     {!! Form::date('startDate',$course->startDate,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">

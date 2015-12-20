@@ -121,10 +121,11 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($id);
 
-        $course->delete();
+        # removeing all foreign key constraints before deleting the actual object
+        $course->participants()->detach();
+        \Session::flash('flash_message', 'Der Kurs wurde erfolgreich gelöscht');
+        \Session::flash('flash_message_type', 'info');
         return redirect()->action('CourseController@index');
-        \Session::flash('flash_message', "Der Kurs wurde erfolgreich gelöscht");
-
     }
 
     /**
@@ -141,7 +142,8 @@ class CourseController extends Controller
         $course->confirmed=true;
         $course->save();
 
-        \Session::flash('flash_message', "Der Kurs wurde erfolgreich bestätigt");
+        \Session::flash('flash_message', 'Der Kurs wurde erfolgreich bestätigt');
+        \Session::flash('flash_message_type', 'success');
         return redirect()->action('CourseController@show',[$course->id]);
     }
 
@@ -154,9 +156,18 @@ class CourseController extends Controller
     public function signup($id)
     {
         $course = Course::findOrFail($id);
-        $course->participants()->attach(Auth::user());
-        \Session::flash('flash_message', "Du wurdest erfolgreich zum Kurs angemeldet");
-        return redirect()->action('CourseController@show',[$course->id]);
+
+        if ($course->participants()->count() < $course->participantNum) {
+            $course->participants()->attach(Auth::user());
+            \Session::flash('flash_message', "Du wurdest erfolgreich zum Kurs angemeldet");
+            \Session::flash('flash_message_type', "success");
+            return redirect()->action('CourseController@show',[$course->id]);
+        }else{
+            \Session::flash('flash_message',"Der Kurs ist leider voll, keine Anmeldung möglich");
+            \Session::flash('flash_message_type','warning');
+            return redirect()->action('CourseController@show',[$course->id]);
+        }
+
 
     }
 
@@ -174,6 +185,7 @@ class CourseController extends Controller
         $course->participants()->detach(Auth::user());
 
         \Session::flash('flash_message', "Du wurdest erfolgreich vom Kurs abgemeldet");
+        \Session::flash('flash_message_type', "success");
         return redirect()->action('CourseController@show',[$course->id]);
 
     }
@@ -214,6 +226,7 @@ class CourseController extends Controller
 
         if ($course->save()){
             \Session::flash('flash_message', "Der Kurs wurde erfolgreich gespeichert");
+            \Session::flash('flash_message_type', "success");
             return redirect()->action('CourseController@show',[$course->id]);
 
         }

@@ -22,14 +22,7 @@
     </div>
 
     <div class="container">
-        @if (Session::has('flash_message'))
-            <div class="alert alert-success">{{Session::get('flash_message')}}
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            </div>
-            <script>
-                $('div.alert').delay(4000).slideUp(300);
-            </script>
-        @endif
+        @include('includes.flash')
         <div class="row">
             <div class="col-md-12">
                 <div class="well">
