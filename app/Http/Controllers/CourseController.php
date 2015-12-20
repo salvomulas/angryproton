@@ -29,10 +29,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        /**
-         * getting a valid list of institiutions for a dropdown
-         *#TODO need to get the list of institutions from the user object
-         */
+        $course = new Course;
         $institutions= array();
         foreach( Institution::all() as $institution){
             $institutions[$institution->id] = $institution->name;
@@ -46,15 +43,12 @@ class CourseController extends Controller
         asort($institutions);
 
         # the view is used for creation and modification so the corresponding action has to be passed
-        $action = action('CourseController@store');
 
-        $course = new Course;
-        return view ('public.createOrEditCourse')
-                ->with ('course',$course)
-                ->with ('institutions',$institutions)
-                ->with ('action',$action);
+
+        return view ('public.createCourse')
+            ->with ('course',$course)
+            ->with('institutions',$institutions);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -63,44 +57,9 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request,[
-           'institution' => 'required|integer',
-           'courseName' => 'required|max:64',
-           'description' => 'required|min:10',
-           'price'=>'numeric|required|min:0|max:9999',
-           'startDate' =>'required|date',
-           'duration' => 'required|min:0|max:480|integer'
-        ]);
-
-
-        $institution = Institution::find($request->institution);
-        #TODO validate the institute here.
-        #$this->validator->after(function($validator) {
-        #    if ($this->somethingElseIsInvalid()) {
-        #        $validator->errors()->add('field', 'Something is wrong with this field!');
-        #    }
-        #});
-
-
         $course = new Course;
-        $course->institution()->associate($institution);
-        $course->courseName = $request->courseName;
-        $course->description = $request->description;
-        $course->price = $request->price;
-        $course->startDate = $request->startDate;
-        $course->duration = $request->duration;
-        $course->user()->associate(Auth::user());
-
-        if ($course->save()){
-            return redirect("/");
-        }
-        else {
-            return Redirect::back()
-                ->withMessage("Der Kurs konnte leider nicht erstellt werden")
-                ->withInput();
-        }
-
+        $message="Der Kurs wurde erfolgreich erstellt";
+        return $this->storeORUpdate($request,$course);
     }
 
     /**
@@ -123,9 +82,19 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $course = Course::findOrFail($id);
+        $institutions= array();
+        foreach( Institution::all() as $institution){
+            $institutions[$institution->id] = $institution->name;
+        }
+        asort($institutions);
 
+        # the view is used for creation and modification so the corresponding action has to be passed
+
+        return view ('public.editCourse')
+            ->with ('course',$course)
+            ->with('institutions',$institutions);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -135,7 +104,8 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::findOrFail($id);
+        return $this->storeORUpdate($request,$course);
     }
 
     /**
@@ -147,5 +117,46 @@ class CourseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function storeORUpdate(Request $request, Course $course){
+
+        $this->validate($request,[
+            'institution' => 'required|integer',
+            'courseName' => 'required|max:64',
+            'description' => 'required|min:10',
+            'price'=>'numeric|required|min:0|max:9999',
+            'startDate' =>'required|date',
+            'duration' => 'required|min:0|max:480|integer'
+        ]);
+
+
+        $institution = Institution::find($request->institution);
+        #TODO validate the institute here.
+        #$this->validator->after(function($validator) {
+        #    if ($this->somethingElseIsInvalid()) {
+        #        $validator->errors()->add('field', 'Something is wrong with this field!');
+        #    }
+        #});
+
+        $course->institution()->associate($institution);
+        $course->courseName = $request->courseName;
+        $course->description = $request->description;
+        $course->price = $request->price;
+        $course->startDate = $request->startDate;
+        $course->duration = $request->duration;
+        $course->user()->associate(Auth::user());
+
+        if ($course->save()){
+            \Session::flash('flash_message', "Der Kurs wurde erfolgreich gespeichert");
+            return redirect()->action('CourseController@show',[$course->id]);
+
+        }
+        else {
+            return Redirect::back()
+                ->withError("Der Kurs konnte leider nicht gespeichert werden.")
+                ->withInput();
+        }
+
     }
 }

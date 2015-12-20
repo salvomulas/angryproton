@@ -5,7 +5,6 @@
     @endsection
 
     @section ('body')
-
             <!-- Jumbotron Container -->
     <div class="jumbotron">
         <div class="container">
@@ -22,7 +21,18 @@
     </div>
 
     <div class="container">
+        @if (Session::has('flash_message'))
+            <div class="alert alert-success">{{Session::get('flash_message')}}
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            </div>
+            <script>
+                $('div.alert').delay(4000).slideUp(300);
+            </script>
+        @endif
         <div class="col-md-6">
+            Kurs editieren <a href="{{ action( 'CourseController@edit',[$course->id] ) }}"<i
+                    class="fa fa-pencil-square"></i></a>
+
             <div class="table-responsive">
                 <table class="table table-hover table-striped">
                     <tbody>
