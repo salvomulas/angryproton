@@ -63,7 +63,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongstoMany(Role::class, 'institution_role_user')->withPivot('institution_id');
     }
 
     /**
@@ -79,6 +79,11 @@ class User extends Model implements AuthenticatableContract,
         }
         // Intersection removes all items which are supplied from the roles() method
         return !! $role->intersect($this->roles)->count();;
+    }
+
+    public function hasSuperpowers ()
+    {
+        return !! $this->isAdmin;
     }
 
     /**
