@@ -10,8 +10,7 @@
         <div class="container">
             <div class="col-md-8 col-sm-12 col-xs-12">
                 <h3>Kursdetails: {{ $course->courseName }}</h3>
-
-                <p> </p>
+                <h4>angeboten durch: {{ $institution->name }}</h4>
             </div>
             <div class="col-md-4 hidden-sm hidden-xs text-right">
                 <i class="fa fa-5x fa-book"></i>
@@ -22,67 +21,59 @@
 
     <div class="container">
         @include('includes.flash')
-        <div class="col-md-6">
-            <!-- TODO only show button if your allowed to edit -->
-                Kurs editieren <a href="{{ action( 'CourseController@edit',[$course->id] ) }}"<i
-                    class="fa fa-pencil-square"></i></a>
-            <!-- TODO show this only if the user is owner of the course -->
-            <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                    <tbody>
-                    <tr>
-                        <td>Kursname</td>
-                        <td>{{ $course->courseName }}</td>
-                    </tr>
-                    <td>Beschreibung</td>
-                    <td>{{ $course->description }}</td>
-                    </tr>
-                    <td>Startdatum</td>
-                    <td>{{ $course->startDate }}</td>
-                    </tr>
-                    <td>Dauer</td>
-                    <td>{{ $course->duration }}</td>
-                    </tr>
-                    <td>Preis</td>
-                    <td>{{ $course->price }}</td>
-                    </tr>
-                    <td>Maximal Anzahl Teilnehmer</td>
-                    <td>{{ $course->participantNum }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+
+        <div class="col-md-3 col-md-push-9">
+            <div class="list-group">
+
+                @if ($course->isUserSignedUp(Auth::user()))
+                    <a href="{{ action('CourseController@cancel',[$course->id]) }}"
+                       class="list-group-item"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Ausschreiben</a>
+                @else
+                    <a href="{{ action('CourseController@signup',[$course->id]) }}"
+                       class="list-group-item"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Einschreiben</a>
+                @endif
+                @can ('update_course', $course)
+                <a href="{{ action('CourseController@participants',[$course->id]) }}" class="list-group-item"><i
+                            class="fa fa-list fa-fw"></i>&nbsp; Teilnehmerliste ansehen</a>
+                <a href="{{ action('CourseController@edit',[$course->id]) }}" class="list-group-item"><i
+                            class="fa fa-edit fa-fw"></i>&nbsp; Kurs
+                    bearbeiten</a>
+                @if (! $course->isConfirmed())
+                    <a href="{{ action('CourseController@confirm',[$course->id]) }}" class="list-group-item"><i
+                                class="fa fa-check fa-fw"></i>&nbsp; Durchführung
+                        bestätigen</a>
+                @endif
+                <a href="{{ action('CourseController@destroy',[$course->id]) }}" class="list-group-item"><i
+                            class="fa fa-close fa-fw"></i>&nbsp; Kurs absagen
+                    und löschen</a>
+                @endcan
+
             </div>
+        </div>
 
-            <!-- TODO need to implement ACL's so only the correct people may see the corresponding buttons-->
-
-            {!! Form::open(array('url' => action('CourseController@confirm',[$course->id]))) !!}
-            {!! Form::submit('Bestätigen',["class"=>"btn btn-default"]) !!}
-            {!! Form::close() !!}
-
-            {!! Form::open(array('url' => action('CourseController@signup',[$course->id]))) !!}
-            {!! Form::submit('Einschreiben',["class"=>"btn btn-default"]) !!}
-            {!! Form::close() !!}
-
-            {!! Form::open(array('url' => action('CourseController@destroy',[$course->id]),'method'=>'delete')) !!}
-            {!! Form::submit('Absagen',["class"=>"btn btn-warning"]) !!}
-            {!! Form::close() !!}
-
-            {!! Form::open(array('url' => action('CourseController@cancel',[$course->id]))) !!}
-            {!! Form::submit('Abmelden',["class"=>"btn btn-warning"]) !!}
-            {!! Form::close() !!}
-
-            <!-- TODO only show this to the course Owner -->
-            <hr/>
-            <h3> Kursteilnehmer {{$course->participants()->count()}}/{{$course->participantNum}}</h3>
+        <div class="col-md-9 col-md-pull-3">
             <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                    @foreach ($course->participants()->getResults() as $user)
-                        <tr>
-                            <td>{{ $user->firstName }}</td>
-                            <td>{{ $user->lastName }}</td>
-                            <td>{{ $user->email }}</td>
-
-                    @endforeach
+                <table class="table table-striped">
+                    <tr>
+                        <th>Beschreibung</th>
+                        <td>{{ $course->description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Startdatum</th>
+                        <td>{{ $course->startDate }}</td>
+                    </tr>
+                    <tr>
+                        <th>Dauer</th>
+                        <td>{{ $course->duration }}</td>
+                    </tr>
+                    <tr>
+                        <th>Preis</th>
+                        <td>{{ $course->price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Maximal Anzahl Teilnehmer</th>
+                        <td>{{ $course->participantNum }}</td>
+                    </tr>
                 </table>
             </div>
         </div>

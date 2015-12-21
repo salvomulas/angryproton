@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Permission;
 use App\Course;
+use App\Policies\CoursePolicy;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -17,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        //Course::class => CoursePolicy::class,
     ];
 
     /**

@@ -40,4 +40,23 @@ class Course extends Model
     {
         return $this->belongsToMany('App\User', 'user_course');
     }
+
+    /**
+     * Checks if the user is already signed up for the Course
+     * @param User $user
+     * @return bool
+     */
+    public function isUserSignedUp(User $user)
+    {
+        return !! $this->participants()->find($user->id);
+    }
+
+    /**
+     * Checks if the course is already confirmed
+     * @return bool
+     */
+    public function isConfirmed ()
+    {
+        return !! $this->confirmed;
+    }
 }

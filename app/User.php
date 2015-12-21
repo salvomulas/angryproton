@@ -42,9 +42,9 @@ class User extends Model implements AuthenticatableContract,
      * Returns the Gravatar URL to display a profile picture
      * @return string
      */
-    public function getGravatarAttribute ()
+    public function getGravatarAttribute()
     {
-        $hash = md5 (strtolower (trim ($this->attributes['email'])));
+        $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash?s=150";
     }
 
@@ -52,9 +52,9 @@ class User extends Model implements AuthenticatableContract,
      * Returns the users full name by combining the first and last name
      * @return string
      */
-    public function getFullNameAttribute ()
+    public function getFullNameAttribute()
     {
-        return ($this->attributes['firstName'].' '. $this->attributes['lastName']);
+        return ($this->attributes['firstName'] . ' ' . $this->attributes['lastName']);
     }
 
     /**
@@ -78,10 +78,10 @@ class User extends Model implements AuthenticatableContract,
             return $this->roles->contains('name', $role);
         }
         // Intersection removes all items which are supplied from the roles() method
-        return !! $role->intersect($this->roles)->count();;
+        return !!$role->intersect($this->roles)->count();;
     }
 
-    public function hasSuperpowers ()
+    public function hasSuperpowers()
     {
         return !! $this->isAdmin;
     }
@@ -90,15 +90,17 @@ class User extends Model implements AuthenticatableContract,
      *  courses I lead.
      *  Relationship with Courses
      */
-    public function ownedCourses(){
-        return $this->hasMany('Course','assignedOwner');
+    public function ownedCourses()
+    {
+        return $this->hasMany('Course', 'assignedOwner');
     }
 
     /**
      *  courses I participate
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function courses(){
+    public function courses()
+    {
         return $this->belongsToMany('courses');
     }
 
