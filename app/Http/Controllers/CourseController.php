@@ -30,21 +30,10 @@ class CourseController extends Controller
     public function create()
     {
         $course = new Course;
-        $institutions= array();
-        foreach( Institution::all() as $institution){
-            $institutions[$institution->id] = $institution->name;
-        }
-        /*
-         * this shit cost me about an hour of my life.
-         * http://php.net/manual/en/array.sorting.php
-         * that's just bad implementation. seriously. a "named" key is a fucking dictionary and it does not have an
-         * order.
-         */
-        asort($institutions);
+        $institutions = Auth::user()->institutions->lists('name');
+        //$institutions = Institution::lists('name');
 
         # the view is used for creation and modification so the corresponding action has to be passed
-
-
         return view ('public.createCourse')
             ->with ('course',$course)
             ->with('institutions',$institutions);

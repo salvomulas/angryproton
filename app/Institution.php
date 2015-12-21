@@ -17,7 +17,6 @@ class Institution extends Model
     /*
      *
      *  relationship with the User Class
-     *
      */
     public function user(){
         return $this->belongsTo('User','assignedOwner');

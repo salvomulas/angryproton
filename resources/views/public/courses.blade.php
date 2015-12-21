@@ -23,22 +23,32 @@
 
     <div class="container">
         @include('includes.flash')
-        <div class="row">
-            <div class="col-md-12">
+
+
+        <div class="col-md-3 col-md-push-9">
+            <div class="list-group">
+                @can ('manage_courses')
+                <a href="{{ action('CourseController@create') }}" class="list-group-item"><i
+                            class="fa fa-plus fa-fw"></i>&nbsp; Neuer Kurs anlegen</a>
+                @endcan
+                @if (Auth::check())
+                    <a href="#" class="list-group-item"><i class="fa fa-file fa-fw"></i>&nbsp; Meine Anmeldungen</a>
+                    @can ('manage_courses')
+                    <a href="#" class="list-group-item"><i class="fa fa-user fa-fw"></i>&nbsp; Eigene Kurse</a>
+                    @endcan
+                @endif
+            </div>
+        </div>
+
+        <div class="col-md-9 col-md-pull-3">
+
+            @if (count($courses) > 0)
+
                 <div class="well">
                     {!! Form::open() !!}
                     {!! Form::text('searchCourse', null, ['placeholder' => 'Kurse durchsuchen...', 'class' => 'form-control']) !!}
                     {!! Form::close() !!}
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-
-                neuer Kurs anlegen <a href="{{action('CourseController@create' )}}"<i
-                                            class="fa fa-plus-circle"></i></a>
-
-            @if (count($courses) > 0)
 
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">

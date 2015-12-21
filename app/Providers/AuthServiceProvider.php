@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Permission;
+use App\Course;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -29,8 +30,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         // Grants complete access if admin
-        $gate->before(function ($user, $ability) {
-            return $user->hasSuperpowers();
+        $gate->before(function ($user) {
+            if ($user->hasSuperpowers()) {
+                return true;
+            };
+        });
+
+        // Get owner of a course and define permission to modify
+        $gate->define('update-course', function ($user, $course) {
+            return $course->isOwner($user);
         });
 
         // Wrapped within try/catch to avoid migration problems in testing
@@ -46,17 +54,6 @@ class AuthServiceProvider extends ServiceProvider
         } catch (QueryException $e) {
             return false;
         }
-
-        // Get owner of a course and define permission to modify
-        $gate->define('update-course', function ($user, $course) {
-            return $user->id === $course->assignedOwner;
-        });
-
-        //allow signup to a course
-       //$gate->define('signup',function(){
-            #$user->id != $course-assignedOwner;
-       //     return true;
-       // });
 
     }
 

@@ -67,10 +67,8 @@ Route::resource ('courses', 'CourseController');
  * **************************************************************************
  */
 Route::get ('/test', function () {
-    Auth::loginUsingId(1);
-    if (Gate::allows('manage_courses')) {
-        return "Es läuft";
-    }
+    $user = Auth::user();
+    dd(\App\Institution::getPermittedInstitutions($user));
 });
 
 Route::get ('/403', function () {

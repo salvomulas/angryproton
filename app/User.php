@@ -101,4 +101,14 @@ class User extends Model implements AuthenticatableContract,
     public function courses(){
         return $this->belongsToMany('courses');
     }
+
+    /**
+     * Returns all institutions, which are assigned to a user with a certain role
+     * @return mixed
+     */
+    public function institutions()
+    {
+        return $this->belongstoMany(Institution::class, 'institution_role_user')->withPivot('role_id');
+    }
+
 }
