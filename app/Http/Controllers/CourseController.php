@@ -31,7 +31,7 @@ class CourseController extends Controller
     public function create()
     {
         $course = new Course;
-        $institutions = Auth::user()->institutions->lists('name');
+        $institutions = Auth::user()->institutions->lists('name', 'id');
 
         # the view is used for creation and modification so the corresponding action has to be passed
         return view('public.createCourse')
@@ -59,7 +59,7 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {;
         $course = Course::findOrFail($id);
         $institution = Institution::findOrFail($course->assignedInstitution);
         return view('public.courseDetail')
@@ -94,11 +94,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        $institutions = array();
-        foreach (Institution::all() as $institution) {
-            $institutions[$institution->id] = $institution->name;
-        }
-        asort($institutions);
+        $institutions = Auth::user()->institutions->lists('name', 'id');
 
         # the view is used for creation and modification so the corresponding action has to be passed
 
