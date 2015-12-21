@@ -22,14 +22,9 @@
 
     <div class="container">
 
-        @can('update-course', $course)
+        @can('update_course', $course)
             <h3>Yes you can</h3>
         @endcan
-
-        <h2>{{ $course }}</h2>
-
-        <h2>{{ Auth::user()->id }}</h2>
-        <h2>{{ $course->assignedOwner }}</h2>
 
         @if (count($errors) > 0)
             <div class="alert alert-danger" role="alert">

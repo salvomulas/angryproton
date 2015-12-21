@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Get owner of a course and define permission to modify
-        $gate->define('update-course', function ($user, $course) {
+        $gate->define('update_course', function ($user, $course) {
             return $course->isOwner($user);
         });
 
