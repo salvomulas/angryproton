@@ -35,12 +35,14 @@
             @if (Auth::check())
                 <h4>Aktionen</h4>
                 <div class="list-group">
-                    @if ($course->isUserSignedUp(Auth::user()))
-                        <a href="{{ action('CourseController@cancel',[$course->id]) }}"
-                           class="list-group-item"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Ausschreiben</a>
-                    @else
-                        <a href="{{ action('CourseController@signup',[$course->id]) }}"
-                           class="list-group-item"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Einschreiben</a>
+                    @if(!$course->isOwner(Auth::user()))
+                        @if ($course->isUserSignedUp(Auth::user()))
+                            <a href="{{ action('CourseController@cancel',[$course->id]) }}"
+                               class="list-group-item"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Ausschreiben</a>
+                        @else
+                            <a href="{{ action('CourseController@signup',[$course->id]) }}"
+                               class="list-group-item"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Einschreiben</a>
+                        @endif
                     @endif
                     @can ('update_course', $course)
                     <a href="{{ action('CourseController@participants',[$course->id]) }}" class="list-group-item"><i
