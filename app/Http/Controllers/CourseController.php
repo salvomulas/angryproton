@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Gate;
+use Input;
 use App\User;
 use App\Course;
 use App\Institution;
@@ -25,10 +26,33 @@ class CourseController extends Controller
     }
 
     /**
+     * searches the description and title of a course and displays the result
+     * @param Request $request
+     * @return $this
+     */
+    public function search()
+    {
+        $searchString = Input::get('searchCourse');
+        $courses = Course::where('courseName', 'LIKE',"%$searchString%")
+                ->orWhere('description','LIKE',"%$searchString%")->paginate();
+        return view('public.courses')->with('courses', $courses);
+
+    }
+    /**
+     * generate a list of courses the user has signed up for.
+     * @return \Illuminate\Http\Response
+     */
+    public function coursesUser()
+    {
+        $user = Auth::user();
+        $courses = $user->courses()->paginate(15);
+        return view('public.courses')->with('courses', $courses);
+    }
+    /**
      * show the courses of a specific prof
      * @return mixed
      */
-    public function coursesUser($id)
+    public function coursesTeacher($id)
     {
         $user = User::findOrFail($id);
         $courses = $user->ownedCourses()->paginate(15);
