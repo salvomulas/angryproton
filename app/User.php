@@ -106,11 +106,16 @@ class User extends Model implements AuthenticatableContract,
 
     /**
      * Returns all institutions, which are assigned to a user with a certain role
+     * @param null $role
      * @return mixed
      */
-    public function institutions()
+    public function institutions($role = null)
     {
-        return $this->belongstoMany(Institution::class, 'institution_role_user')->withPivot('role_id');
+        if (! $role) {
+            return $this->belongstoMany(Institution::class, 'institution_role_user')->withPivot('role_id');
+        } else {
+            return $this->belongstoMany(Institution::class, 'institution_role_user')->withPivot('role_id')->where('role_id', $role);
+        }
     }
 
 }

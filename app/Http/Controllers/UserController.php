@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Role;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PrivateController
@@ -31,7 +33,13 @@ class UserController extends Controller
      */
     public function index ()
     {
-        return view ('user.dashboard');
+        $roles = Role::all();
+        $institutionsTeach = Auth::user()->institutions(1)->get();
+        $institutionsMod = Auth::user()->institutions(2)->get();
+        return view ('user.dashboard')
+            ->with('roles', $roles)
+            ->with('institutionsTeach', $institutionsTeach)
+            ->with('institutionsMod', $institutionsMod);
     }
 
     /**

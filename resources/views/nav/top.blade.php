@@ -24,8 +24,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->firstName ." ". Auth::user()->lastName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-gear"></i> Einstellungen</a></li>
-                            <li><a href="#"><i class="fa fa-bell"></i> Benachrichtigungen</a></li>
+                            <li><a href="{{ action('UserController@index') }}"><i class="fa fa-gear"></i> Dashboard</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url ('/auth/logout') }}"><i class="fa fa-lock"></i> Ausloggen</a></li>
                         </ul>
