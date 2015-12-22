@@ -146,11 +146,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        /*
-         * additional packages
-         */
-        itbz\fpdf\fpdf::class,
-        itbz\fpdi\fdpi::class
+        App\Providers\FPDFServiceProvider::class,
+
     ],
 
     /*
@@ -179,10 +176,8 @@ return [
         'Eloquent'  => Illuminate\Database\Eloquent\Model::class,
         'Event'     => Illuminate\Support\Facades\Event::class,
         'File'      => Illuminate\Support\Facades\File::class,
-        #'Form'      => Illuminate\Html\FormFacade::class,
         'Gate'      => Illuminate\Support\Facades\Gate::class,
         'Hash'      => Illuminate\Support\Facades\Hash::class,
-        #'Html'      => Illuminate\Html\HtmlFacade::class,
         'Input'     => Illuminate\Support\Facades\Input::class,
         'Inspiring' => Illuminate\Foundation\Inspiring::class,
         'Lang'      => Illuminate\Support\Facades\Lang::class,
@@ -202,7 +197,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Collective\Html\FormFacade::class,
-        'Html'      => Collective\Html\HtmlFacade::class
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'FPDF'      => fpdf\FPDF::class,
+        'FPDI'      => fpdi\FPDI::class
     ],
 
 ];
