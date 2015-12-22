@@ -59,4 +59,9 @@ class Course extends Model
     {
         return !! $this->confirmed;
     }
+
+    public function bill()
+    {
+        $this->hasOne("App/Bill");
+    }
 }

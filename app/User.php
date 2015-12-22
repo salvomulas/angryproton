@@ -118,4 +118,9 @@ class User extends Model implements AuthenticatableContract,
         }
     }
 
+    public function bills()
+    {
+        $this->hasMany('App/Bill');
+    }
+
 }
