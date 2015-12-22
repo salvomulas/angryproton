@@ -22,6 +22,9 @@
     </div>
 
     <div class="container">
+
+        @include ('includes.flash')
+
         <div class="col-md-3 col-md-push-9">
 
             <div class="well">
@@ -29,6 +32,20 @@
 
                 <p>Wir freuen uns stets drauf, neue Institutionen bei uns begrüssen zu dürfen!</p>
             </div>
+
+            @if (Auth::check())
+                <div class="list-group">
+                    @if (Auth::user()->hasSuperpowers())
+                        <a href="{{ action('InstitutionController@create') }}" class="list-group-item"><i
+                                    class="fa fa-plus fa-fw"></i>&nbsp; Neue Institution anlegen</a>
+                    @endif
+                    @can('manage_institutions')
+                    <a href="#" class="list-group-item"><i class="fa fa-institution fa-fw"></i>&nbsp; Meine
+                        Institutionen</a>
+                    @endcan
+                </div>
+            @endif
+
         </div>
         <div class="col-md-9 col-md-pull-3">
 
