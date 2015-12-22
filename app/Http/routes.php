@@ -78,3 +78,17 @@ Route::get ('/test', function () {
 Route::get ('/403', function () {
     return view ('errors.403');
 });
+
+/*
+ * testing pdf generation
+ */
+
+Route::get('pdf', function(){
+
+    Fpdf::AddPage();
+    Fpdf::SetFont('Arial','B',16);
+    Fpdf::Cell(40,10,'Hello World!');
+    Fpdf::Output();
+    exit;
+
+});

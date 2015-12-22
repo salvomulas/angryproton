@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3eee8b54d47262beec720da01e7e45f2",
+    "hash": "9ec3765d8f18674a47a1538bd6a36a82",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -587,16 +587,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.15",
+            "version": "1.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "31525caf9e8772683672fefd8a1ca0c0736020f4"
+                "reference": "183e1a610664baf6dcd6fceda415baf43cbdc031"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/31525caf9e8772683672fefd8a1ca0c0736020f4",
-                "reference": "31525caf9e8772683672fefd8a1ca0c0736020f4",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/183e1a610664baf6dcd6fceda415baf43cbdc031",
+                "reference": "183e1a610664baf6dcd6fceda415baf43cbdc031",
                 "shasum": ""
             },
             "require": {
@@ -610,7 +610,7 @@
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "^2.2",
                 "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.1"
+                "phpunit/phpunit": "~4.8"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -667,7 +667,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-09-30 22:26:59"
+            "time": "2015-12-19 20:16:43"
         },
         {
             "name": "monolog/monolog",
@@ -2121,6 +2121,78 @@
             "time": "2015-05-11 14:41:42"
         },
         {
+            "name": "itbz/fpdf",
+            "version": "1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hanneskod/fpdf.git",
+                "reference": "06d02a7bf227a62d37691a4e7e9c3a35efcb41c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hanneskod/fpdf/zipball/06d02a7bf227a62d37691a4e7e9c3a35efcb41c3",
+                "reference": "06d02a7bf227a62d37691a4e7e9c3a35efcb41c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fpdf": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "no usage restriction"
+            ],
+            "description": "Unofficial PSR-0 compliant version of the FPDF library",
+            "homepage": "http://www.fpdf.org/",
+            "time": "2013-12-27 14:18:15"
+        },
+        {
+            "name": "itbz/fpdi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hanneskod/fpdi.git",
+                "reference": "c4fa110b8a8a6940616ec1a1ef323eafd8601664"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hanneskod/fpdi/zipball/c4fa110b8a8a6940616ec1a1ef323eafd8601664",
+                "reference": "c4fa110b8a8a6940616ec1a1ef323eafd8601664",
+                "shasum": ""
+            },
+            "require": {
+                "itbz/fpdf": "1.7.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "hanneskod/classtools": "~1.0",
+                "nikic/php-parser": "~1.0",
+                "phpunit/phpunit": "4.*",
+                "symfony/finder": "~2.3",
+                "tecnick.com/tcpdf": "6.*"
+            },
+            "suggest": {
+                "tecnick.com/tcpdf": "FPDI supports TCPDF as a replacement for FPDF"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "fpdi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Unofficial PSR-4 compliant version of the FPDI library",
+            "time": "2015-04-01 13:36:52"
+        },
+        {
             "name": "mockery/mockery",
             "version": "0.9.4",
             "source": {
@@ -3197,7 +3269,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "itbz/fpdi": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
