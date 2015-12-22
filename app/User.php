@@ -92,7 +92,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function ownedCourses()
     {
-        return $this->hasMany('Course', 'assignedOwner');
+        return $this->hasMany('App\Course', 'assignedOwner');
     }
 
     /**

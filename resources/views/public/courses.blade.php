@@ -34,7 +34,7 @@
                 @if (Auth::check())
                     <a href="#" class="list-group-item"><i class="fa fa-file fa-fw"></i>&nbsp; Meine Anmeldungen</a>
                     @can ('manage_courses')
-                    <a href="#" class="list-group-item"><i class="fa fa-user fa-fw"></i>&nbsp; Eigene Kurse</a>
+                    <a href="{{ action('CourseController@coursesUser',[Auth::user()->id ]) }}" class="list-group-item"><i class="fa fa-user fa-fw"></i>&nbsp; Eigene Kurse</a>
                     @endcan
                 @endif
             </div>
@@ -73,6 +73,7 @@
                         </tbody>
                     </table>
                 </div>
+                {!! $courses->render() !!}
             @else
                 <div class="alert alert-danger" role="alert">
                     Keine Kurse vorhanden!

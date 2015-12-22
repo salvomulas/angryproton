@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Gate;
+use App\User;
 use App\Course;
 use App\Institution;
 use Illuminate\Http\Request;
@@ -19,10 +20,20 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::paginate(15);
         return view('public.courses')->with('courses', $courses);
     }
 
+    /**
+     * show the courses of a specific prof
+     * @return mixed
+     */
+    public function coursesUser($id)
+    {
+        $user = User::findOrFail($id);
+        $courses = $user->ownedCourses()->paginate(15);
+        return view('public.courses')->with('courses', $courses);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +70,7 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {;
+    {
         $course = Course::findOrFail($id);
         $institution = Institution::findOrFail($course->assignedInstitution);
         return view('public.courseDetail')

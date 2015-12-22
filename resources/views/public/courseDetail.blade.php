@@ -55,9 +55,13 @@
                                     class="fa fa-check fa-fw"></i>&nbsp; Durchführung
                             bestätigen</a>
                     @endif
-                    <a href="{{ action('CourseController@destroy',[$course->id]) }}" class="list-group-item"><i
-                                class="fa fa-close fa-fw"></i>&nbsp; Kurs absagen
-                        und löschen</a>
+                        <div class=list-group-item'>
+                            <i class="fa fa-close fa-fw"></i>
+                            {!! Form::open(['url' => action('CourseController@destroy',[$course->id]),'method'=>'DELETE','class'=>'list-group-item']) !!}
+                            {!! Form::submit('Kurs Absagen und löschen') !!}
+                            {!! Form::close() !!}
+                        </div>
+
                     @endcan
                 </div>
             @endif
@@ -83,8 +87,8 @@
                         <td>{{ $course->price }}</td>
                     </tr>
                     <tr>
-                        <th>Maximal Anzahl Teilnehmer</th>
-                        <td>{{ $course->participantNum }}</td>
+                        <th>Anzahl Teilnehmer</th>
+                        <td>{{$course->participants()->count()}}/{{ $course->participantNum }}</td>
                     </tr>
                 </table>
             </div>
