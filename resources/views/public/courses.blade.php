@@ -32,9 +32,9 @@
                             class="fa fa-plus fa-fw"></i>&nbsp; Neuer Kurs anlegen</a>
                 @endcan
                 @if (Auth::check())
-                    <a href="#" class="list-group-item"><i class="fa fa-file fa-fw"></i>&nbsp; Meine Anmeldungen</a>
+                    <a href="{{ action('CourseController@coursesUser',[Auth::user()->id ]) }}" class="list-group-item"><i class="fa fa-shopping-basket"></i>&nbsp; Meine Anmeldungen</a>
                     @can ('manage_courses')
-                    <a href="{{ action('CourseController@coursesUser',[Auth::user()->id ]) }}" class="list-group-item"><i class="fa fa-user fa-fw"></i>&nbsp; Eigene Kurse</a>
+                    <a href="{{ action('CourseController@coursesTeacher',[Auth::user()->id ]) }}" class="list-group-item"><i class="fa fa-user fa-fw"></i>&nbsp; Eigene Kurse</a>
                     @endcan
                 @endif
             </div>
@@ -43,10 +43,10 @@
         <div class="col-md-9 col-md-pull-3">
 
             @if (count($courses) > 0)
-
                 <div class="well">
-                    {!! Form::open() !!}
+                    {!! Form::open(['url'=>action('CourseController@search')])   !!}
                     {!! Form::text('searchCourse', null, ['placeholder' => 'Kurse durchsuchen...', 'class' => 'form-control']) !!}
+                    {!! Form::submit('submit',['class'=>'invisible']) !!}
                     {!! Form::close() !!}
                 </div>
 

@@ -50,6 +50,8 @@ Route::post ('password/reset', 'Auth\PasswordController@postReset');
  * Additional routes for courses
  * TODO I don't know why I can't use post or patch here. but if I do it says its the wrong method.
  */
+Route::post ('courses/search', 'CourseController@search');
+Route::get ('teacher/{id}/courses','CourseController@coursesTeacher');
 Route::get ('user/{id}/courses','CourseController@coursesUser');
 Route::any ('courses/{id}/signup', 'CourseController@signup');
 Route::any ('courses/{id}/cancel', 'CourseController@cancel');
