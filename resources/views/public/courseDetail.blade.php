@@ -23,32 +23,42 @@
         @include('includes.flash')
 
         <div class="col-md-3 col-md-push-9">
-            <div class="list-group">
 
-                @if ($course->isUserSignedUp(Auth::user()))
-                    <a href="{{ action('CourseController@cancel',[$course->id]) }}"
-                       class="list-group-item"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Ausschreiben</a>
-                @else
-                    <a href="{{ action('CourseController@signup',[$course->id]) }}"
-                       class="list-group-item"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Einschreiben</a>
-                @endif
-                @can ('update_course', $course)
-                <a href="{{ action('CourseController@participants',[$course->id]) }}" class="list-group-item"><i
-                            class="fa fa-list fa-fw"></i>&nbsp; Teilnehmerliste ansehen</a>
-                <a href="{{ action('CourseController@edit',[$course->id]) }}" class="list-group-item"><i
-                            class="fa fa-edit fa-fw"></i>&nbsp; Kurs
-                    bearbeiten</a>
-                @if (! $course->isConfirmed())
-                    <a href="{{ action('CourseController@confirm',[$course->id]) }}" class="list-group-item"><i
-                                class="fa fa-check fa-fw"></i>&nbsp; Durchführung
-                        bestätigen</a>
-                @endif
-                <a href="{{ action('CourseController@destroy',[$course->id]) }}" class="list-group-item"><i
-                            class="fa fa-close fa-fw"></i>&nbsp; Kurs absagen
-                    und löschen</a>
-                @endcan
-
+            <h4>Institution</h4>
+            <div clasS="list-group">
+                <a href="{{ action('InstitutionController@show',[$institution->id]) }}"
+                   class="list-group-item"><i class="fa fa-institution fa-fw"></i>&nbsp; Übersicht</a>
+                <a href="#"
+                   class="list-group-item"><i class="fa fa-external-link fa-fw"></i>&nbsp; Externe Webseite</a>
             </div>
+
+            @if (Auth::check())
+                <h4>Aktionen</h4>
+                <div class="list-group">
+                    @if ($course->isUserSignedUp(Auth::user()))
+                        <a href="{{ action('CourseController@cancel',[$course->id]) }}"
+                           class="list-group-item"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Ausschreiben</a>
+                    @else
+                        <a href="{{ action('CourseController@signup',[$course->id]) }}"
+                           class="list-group-item"><i class="fa fa-sign-in fa-fw"></i>&nbsp; Einschreiben</a>
+                    @endif
+                    @can ('update_course', $course)
+                    <a href="{{ action('CourseController@participants',[$course->id]) }}" class="list-group-item"><i
+                                class="fa fa-list fa-fw"></i>&nbsp; Teilnehmerliste ansehen</a>
+                    <a href="{{ action('CourseController@edit',[$course->id]) }}" class="list-group-item"><i
+                                class="fa fa-edit fa-fw"></i>&nbsp; Kurs
+                        bearbeiten</a>
+                    @if (! $course->isConfirmed())
+                        <a href="{{ action('CourseController@confirm',[$course->id]) }}" class="list-group-item"><i
+                                    class="fa fa-check fa-fw"></i>&nbsp; Durchführung
+                            bestätigen</a>
+                    @endif
+                    <a href="{{ action('CourseController@destroy',[$course->id]) }}" class="list-group-item"><i
+                                class="fa fa-close fa-fw"></i>&nbsp; Kurs absagen
+                        und löschen</a>
+                    @endcan
+                </div>
+            @endif
         </div>
 
         <div class="col-md-9 col-md-pull-3">
