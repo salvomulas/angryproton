@@ -35,11 +35,12 @@ class CourseController extends Controller
     public function search()
     {
         $searchString = Input::get('searchCourse');
-        $courses = Course::where('courseName', 'LIKE',"%$searchString%")
-                ->orWhere('description','LIKE',"%$searchString%")->paginate();
+        $courses = Course::where('courseName', 'LIKE', "%$searchString%")
+            ->orWhere('description', 'LIKE', "%$searchString%")->paginate();
         return view('public.courses')->with('courses', $courses);
 
     }
+
     /**
      * generate a list of courses the user has signed up for.
      * @return \Illuminate\Http\Response
@@ -50,6 +51,7 @@ class CourseController extends Controller
         $courses = $user->courses()->paginate(15);
         return view('public.courses')->with('courses', $courses);
     }
+
     /**
      * show the courses of a specific prof
      * @return mixed
@@ -60,6 +62,7 @@ class CourseController extends Controller
         $courses = $user->ownedCourses()->paginate(15);
         return view('public.courses')->with('courses', $courses);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -68,8 +71,11 @@ class CourseController extends Controller
     public function create()
     {
         $course = new Course;
-        $institutions = Auth::user()->institutions->lists('name', 'id');
-
+        if (Auth::user()->hasSuperpowers()) {
+            $institutions = Institution::all()->lists('name', 'id');
+        } else {
+            $institutions = Auth::user()->institutions->lists('name', 'id');
+        }
         # the view is used for creation and modification so the corresponding action has to be passed
         return view('public.createCourse')
             ->with('course', $course)

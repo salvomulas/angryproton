@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Mail;
 
 /**
  * Class PublicController
@@ -22,6 +23,16 @@ class PublicController extends Controller
     public function index()
     {
         return view ('public.home');
+    }
+
+    public function mail() {
+
+        $user = \App\User::findOrFail(55);
+
+        Mail::send('emails.invoice', ['user' => $user], function ($m) use ($user) {
+            $m->from('angryproton@pixeffect.ch', 'AngryProton');
+            $m->to($user->email, $user->name)->subject('Deine Rechnung!');
+        });
     }
 
 }

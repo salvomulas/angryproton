@@ -74,10 +74,10 @@ Route::resource ('courses', 'CourseController');
  * Routes for debugging purposes
  * **************************************************************************
  */
-Route::get ('/test', function () {
-    $user = Auth::user();
-    dd(\App\Institution::getPermittedInstitutions($user));
-});
+Route::get ('/test', [
+    'uses' => 'PublicController@mail',
+    'as' => 'mail'
+]);
 
 Route::get ('/403', function () {
     return view ('errors.403');
