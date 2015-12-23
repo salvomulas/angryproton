@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'mail.pixeffect.ch'),
+    'host' => env('MAIL_HOST', 'asmtp.mail.hostpoint.ch'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 25),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'angryproton@pixeffect.ch', 'name' => 'AngryProton'],
+    'from' => ['address' => 'angryproton@salvomulas.ch', 'name' => 'AngryProton'],
 
     /*
     |--------------------------------------------------------------------------
