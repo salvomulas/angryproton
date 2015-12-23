@@ -64,13 +64,21 @@ Route::get ('courses/{id}/participants', 'CourseController@participants');
 Route::get ('user/{id}/courses','CourseController@coursesUser');
 Route::get ('user/{id}/bills', 'UserController@billsUser');
 
+Route::get('institution/{id}/manage', [
+    'uses' => 'InstitutionController@manage',
+    'as' => 'manageInstitution',
+]);
+Route::post('institution/permission', [
+    'uses' => 'InstitutionController@addPermission',
+    'as' => 'changeInstitution',
+]);
+
 /*
  * Routes for resources
  * **************************************************************************
  */
 Route::resource ('institutions', 'InstitutionController');
 Route::resource ('courses', 'CourseController');
-
 
 /*
  * Routes for debugging purposes

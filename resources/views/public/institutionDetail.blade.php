@@ -27,9 +27,11 @@
             @if (Auth::check())
                 <h4>Aktionen</h4>
                 <div class="list-group">
-                    @can('manage_institutions')
+                    @can ('update_institution', $institution)
                         <a href="{{ action('InstitutionController@edit',[$institution->id]) }}"
                            class="list-group-item"><i class="fa fa-edit fa-fw"></i>&nbsp; Bearbeiten</a>
+                        <a href="{{ action('InstitutionController@manage',[$institution->id]) }}"
+                       class="list-group-item"><i class="fa fa-users fa-fw"></i>&nbsp; Berechtigungen verwalten</a>
                         <a href="{{ action('InstitutionController@destroy',[$institution->id]) }}"
                            class="list-group-item"><i class="fa fa-close fa-fw"></i>&nbsp; Löschen</a>
                     @endcan

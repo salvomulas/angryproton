@@ -52,7 +52,7 @@ class ACLSeeder extends Seeder
         Role::create (array (
             'id'         => '2',
             'name'       => 'moderator',
-            'label'      => 'Institutions-Verwalter',
+            'label'      => 'Institutionsleiter',
             'created_at' => Carbon::now ()->toDateTimeString (),
         ));
 
