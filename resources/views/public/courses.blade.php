@@ -55,7 +55,7 @@
                         <thead>
                         <tr>
                             <th>Kurs</th>
-                            <th>Bezeichnung</th>
+                            <th>Beschreibung</th>
                             <th>Preis</th>
                             <th></th>
                         </tr>

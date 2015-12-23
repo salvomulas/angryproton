@@ -68,7 +68,7 @@ Route::get('institution/{id}/manage', [
     'uses' => 'InstitutionController@manage',
     'as' => 'manageInstitution',
 ]);
-Route::post('institution/permission', [
+Route::post('institution/{id}/permission', [
     'uses' => 'InstitutionController@addPermission',
     'as' => 'changeInstitution',
 ]);

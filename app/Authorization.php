@@ -15,6 +15,7 @@ class Authorization extends Model
      * @var string
      */
     protected $table = 'institution_role_user';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

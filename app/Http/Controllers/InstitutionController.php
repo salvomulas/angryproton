@@ -71,7 +71,7 @@ class InstitutionController extends Controller
             ->with('roles', $roles);
     }
 
-    public function addPermission(Requests\PermissionRequest $request)
+    public function addPermission($id, Requests\PermissionRequest $request)
     {
         $this->middleware('auth');
         if (Gate::denies('manage_institutions')) {
@@ -196,6 +196,6 @@ class InstitutionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Nothing to destroy! Institutions are not removable!
     }
 }
