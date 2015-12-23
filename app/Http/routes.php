@@ -64,6 +64,10 @@ Route::get ('courses/{id}/participants', 'CourseController@participants');
 Route::get ('user/{id}/courses','CourseController@coursesUser');
 Route::get ('user/{id}/bills', 'UserController@billsUser');
 
+Route::get('institution/{id}/user', [
+    'uses' => 'InstitutionController@myInstitutions',
+    'as' => 'myInstitutions',
+]);
 Route::get('institution/{id}/manage', [
     'uses' => 'InstitutionController@manage',
     'as' => 'manageInstitution',

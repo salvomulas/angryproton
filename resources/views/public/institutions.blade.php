@@ -40,7 +40,7 @@
                                     class="fa fa-plus fa-fw"></i>&nbsp; Neue Institution anlegen</a>
                     @endif
                     @can('manage_institutions')
-                    <a href="#" class="list-group-item"><i class="fa fa-institution fa-fw"></i>&nbsp; Meine
+                    <a href="{{ action('InstitutionController@myInstitutions', Auth::user()->id) }}" class="list-group-item"><i class="fa fa-institution fa-fw"></i>&nbsp; Meine
                         Institutionen</a>
                     @endcan
                 </div>
@@ -50,12 +50,6 @@
         <div class="col-md-9 col-md-pull-3">
 
             @if (count($institutions) > 0)
-
-                <div class="well">
-                    {!! Form::open() !!}
-                    {!! Form::text('searchInstitution', null, ['placeholder' => 'Institution suchen...', 'class' => 'form-control']) !!}
-                    {!! Form::close() !!}
-                </div>
 
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
