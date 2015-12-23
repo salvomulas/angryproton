@@ -81,7 +81,7 @@
 
                 @if (count($manager) > 0)
 
-                    <h3>Als Dozent</h3>
+                    <h3>Als Institutionsleiter</h3>
 
                     <div class="table-responsive">
                         <table class="table table-hover table-striped">
