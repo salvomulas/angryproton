@@ -73,14 +73,16 @@ class InstitutionController extends Controller
 
     public function addPermission($id, Requests\PermissionRequest $request)
     {
+
         $this->middleware('auth');
+
         if (Gate::denies('manage_institutions')) {
             abort(403);
         }
-        if (Gate::denies('update_institution', Institution::findOrFail($request->institution_id))) {
+
+        if (Gate::denies('update_institution', Institution::findOrFail($id))) {
             abort(403);
         }
-
         Authorization::create($request->all());
         Session::flash('flash_message', "Die Institutionsrechte wurden erfolgreich angepasst");
         Session::flash('flash_message_type', "success");
