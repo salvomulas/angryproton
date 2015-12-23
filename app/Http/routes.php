@@ -31,6 +31,14 @@ Route::get ('/dashboard', [
     'uses' => 'UserController@index'
 ]);
 
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
+Route::get('auth/password', function() {
+    return view ('auth.password');
+});
+
 /*
  * Routes for authentication purposes
  * **************************************************************************
@@ -39,12 +47,6 @@ Route::controllers ([
     'auth'     => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
-
-Route::get ('password/email', 'Auth\PasswordController@getEmail');
-Route::post ('password/email', 'Auth\PasswordController@postEmail');
-Route::get ('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post ('password/reset', 'Auth\PasswordController@postReset');
-
 
 /*
  * Additional routes for courses
