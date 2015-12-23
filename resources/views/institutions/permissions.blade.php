@@ -82,7 +82,7 @@
 
         <div class="col-md-4">
             <div class="well">
-                <h4>Dozenten hinzufügen</h4>
+                <h4>Berechtigungen hinzufügen</h4>
                 {!! Form::open(['url' => action('InstitutionController@addPermission',[$institution->id])]) !!}
                 <div class="form-group">
                     {!! Form::label('user_id',"Benutzer")!!}
