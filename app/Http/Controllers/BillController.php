@@ -95,4 +95,6 @@ class BillController extends Controller
             'Content-Disposition' => 'inline; ' . $filename
         ]);
     }
+
+
 }
