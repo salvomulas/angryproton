@@ -26,6 +26,17 @@ class InstitutionController extends Controller
         return view('public.institutions')->with('institutions', $institutions);
     }
 
+    public function myInstitutions($id)
+    {
+        $user = User::findOrFail($id);
+        $teacher = $user->institutions(1)->get();
+        $manager = $user->institutions(2)->get();
+        return view ('public.myInstitutions')
+            ->with('username', $user->fullName)
+            ->with('teacher', $teacher)
+            ->with('manager', $manager);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
