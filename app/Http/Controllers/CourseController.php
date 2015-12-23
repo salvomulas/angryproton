@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Gate;
 use Input;
+use Mail;
 use App\User;
 use App\Course;
 use App\Bill;
@@ -196,11 +197,26 @@ class CourseController extends Controller
         $bill = new Bill;
         $bill->course()->associate($course);
         $bill->save();
-
+        $this->sendBill(Auth::user(),$bill);
 
         \Session::flash('flash_message', 'Der Kurs wurde erfolgreich bestätigt');
         \Session::flash('flash_message_type', 'success');
         return redirect()->action('CourseController@show', [$course->id]);
+    }
+
+    /*
+     *
+     */
+    public function sendBill(User $user, $bill)
+    {
+
+        Mail::send('emails.bill', ['text' => 'view','user' => $user], function ($m) use ($user,$bill) {
+            $m->from('billing@angryproton.ch', 'Administration');
+
+            $m->to($user->email, $user->name)->subject('Rechnung - Angryproton');
+            $m->attach($bill->path());
+
+        });
     }
 
     /**

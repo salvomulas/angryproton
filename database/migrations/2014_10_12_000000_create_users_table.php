@@ -16,10 +16,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('address');
-            $table->string('city');
-            $table->integer('zip');
-            $table->string('country');
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->boolean('isAdmin');

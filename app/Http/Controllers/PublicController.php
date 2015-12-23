@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Mail;
+use App\Course;
+use DB;
 
 /**
  * Class PublicController
@@ -22,7 +24,20 @@ class PublicController extends Controller
      */
     public function index()
     {
-        return view ('public.home');
+        $newCourses = Course::orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
+
+        $poularCourses = DB::table('courses')
+            ->leftjoin('user_course', 'courses.id', '=', 'user_course.course_id')
+            ->join('users', 'user_course.user_id', '=', 'users.id')
+            ->groupBy('courses.id')
+            ->take(2)
+            ->get();
+
+        return view ('public.home')
+            ->with('newCourses',$newCourses)
+            ->with('popularCourses',$poularCourses);
     }
 
     public function mail() {
