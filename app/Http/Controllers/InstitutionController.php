@@ -67,7 +67,8 @@ class InstitutionController extends Controller
     public function show($id)
     {
         $institution = Institution::findOrFail($id);
-        dd($institution);
+        return view ('public.institutionDetail')
+            ->with('institution', $institution);
     }
 
     /**
@@ -78,7 +79,17 @@ class InstitutionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->middleware('auth');
+        /* TODO Define Owner method from AuthFacade
+        if (Gate::denies('update_institution', $post)) {
+            abort(403);
+        }
+        */
+        $operation = 'bearbeiten';
+        $institution = Institution::findOrFail($id);
+        return view('forms.edit_institution')
+            ->with('institution', $institution)
+            ->with('operation', $operation);
     }
 
     /**
@@ -90,7 +101,25 @@ class InstitutionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->middleware('auth');
+        /* TODO Define Owner method from AuthFacade
+        if (Gate::denies('update_institution', $post)) {
+            abort(403);
+        }
+        */
+        $institution = Institution::findOrFail($id);
+        $institution->update ($request->all());
+
+        if ($institution->save()) {
+            \Session::flash('flash_message', "Die Institution wurde erfolgreich angepasst");
+            \Session::flash('flash_message_type', "success");
+            return redirect()->action('InstitutionController@show', [$institution->id]);
+
+        } else {
+            return Redirect::back()
+                ->withError("Die Institution konnte nicht bearbeitet werden.")
+                ->withInput();
+        }
     }
 
     /**
