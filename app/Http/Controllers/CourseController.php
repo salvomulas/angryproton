@@ -6,10 +6,12 @@ use Gate;
 use Input;
 use App\User;
 use App\Course;
+use App\Bill;
 use App\Institution;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Yaml\Tests\B;
 
 
 class CourseController extends Controller
@@ -184,6 +186,11 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         $course->confirmed = true;
         $course->save();
+
+        $bill = new Bill;
+        $bill->course()->associate($course);
+        $bill->save();
+
 
         \Session::flash('flash_message', 'Der Kurs wurde erfolgreich bestätigt');
         \Session::flash('flash_message_type', 'success');

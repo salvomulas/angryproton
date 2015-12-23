@@ -4,6 +4,6 @@
     @can('manage_courses')
         <a href="{{ action('CourseController@coursesTeacher',[Auth::user()->id ]) }}" class="list-group-item"><i class="fa fa-graduation-cap"></i>&nbsp; Eigene Kurse</a>
     @endcan
-    <a href="#" class="list-group-item"><i class="fa fa-money fa-fw"></i>&nbsp; Rechnungen</a>
-    <a href="#" class="list-group-item"><i class="fa fa-wrench fa-fw"></i>&nbsp; Einstellungen</a>
+    <a href="{{action('UserController@billsUser',[Auth::user()->id ])}}" class="list-group-item"><i class="fa fa-money fa-fw"></i>&nbsp; Rechnungen</a>
+    <!--  <a href="#" class="list-group-item"><i class="fa fa-wrench fa-fw"></i>&nbsp; Einstellungen</a> -->
 </div>

@@ -14,7 +14,6 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->references('id')->on('users');
             $table->integer('course_id')->refernces('id')->on('courses');
             $table->float('amount');
             $table->string('filename');

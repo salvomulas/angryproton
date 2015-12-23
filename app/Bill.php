@@ -3,64 +3,96 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use FPDI;
+use Illuminate\Support\Facades\Storage;
 
 # we want to define this only once
 define('FPDF_FONTPATH',base_path().'/resources/assets/pdf/font');
 class Bill extends Model
 {
 
-    //
-    public function user()
-    {
-        $this->belongsTo('App\User');
-    }
-
+    /*
+     *
+     */
     public function course()
     {
-        $this->belongsTo('App\Course');
+        return $this->belongsTo('App\Course');
+    }
+    /*
+     *
+     */
+    public function save(array $options = array())
+    {
+        $filename = $this->createBill($this->course()->getResults());
+        $this->amount = $this->course()->getResults()->participantNum;
+        $this->filename=$filename;
+        parent::save($options);
+
     }
 
-    public function createBill(Course $course)
+
+    private function createBill(Course $course)
     {
-        $name = 'Fritz';
-        $lastname ='Hauser';
-        $courseName ='Parties für Introvertierte';
+        $user = $course->user()->getResults();
+        // $name = 'Fritz';
+        // $lastname ='Hauser';
+        // $courseName ='Parties für Introvertierte';
         $id=1;
-        $date="22.3.2015";
-        $maxPart=34;
+        $date=date('m.d.Y');
+        // $maxPart=34;
+
         $pdf = new FPDI();
-        $pdf->AddPage();
         $disk = Storage::disk('local');
         $templatePath= base_path().'/resources/assets/pdf/bill_template.pdf';
-        #dd($template = $disk->path('bill_template.pdf'));
-        $pdf->setSourceFile($templatePath);
-        $tplIdx = $pdf->importPage(1);
-        $pdf->useTemplate($tplIdx);
+        $filename=$this->generateFileName();
+
+
+        # set fonts and whatnot
         $pdf->AddFont('Calibri','','calibri.php');
         $pdf->AddFont('Calibri','B','calibrib.php');
         $pdf->SetFont('Calibri','',11);
 
+        # load template PDF
+
+        $pdf->AddPage();
+        $pdf->setSourceFile($templatePath);
+        $tplIdx = $pdf->importPage(1);
+        $pdf->useTemplate($tplIdx);
+
+        #put text into PDF
+
         $pdf->SetXY(55,101);
-        $pdf->Write(0, $name);
+        $pdf->Write(0, $this->sanitizeString($user->firstName));
         $pdf->SetXY(55,106);
-        $pdf->Write(0, $lastname);
+        $pdf->Write(0, $this->sanitizeString($user->lastName));
         $pdf->SetXY(26,124);
-        $pdf->Write(0, utf8_decode($courseName));
+        $pdf->Write(0, $this->sanitizeString($course->courseName));
         $pdf->SetXY(32,128.2);
         $pdf->Write(0, $id);
         $pdf->SetXY(70,124);
         $pdf->Write(0, utf8_decode($date));
         $pdf->SetXY(110,124);
-        $pdf->Write(0, utf8_decode($maxPart));
+        $pdf->Write(0, $course->participantNum);
         $pdf->SetXY(165,124);
-        $pdf->Write(0, utf8_decode($maxPart));
+        $pdf->Write(0, $course->participantNum);
         $pdf->SetXY(165,138);
         $pdf->SetFont('Calibri','B',11);
-        $pdf->Write(0, utf8_decode($maxPart));
+        $pdf->Write(0, $course->participantNum);
         $output =  $pdf->Output('','s');
-        $disk->put("test.pdf",$output);
-        $pdf->Output();
+        $disk->put($filename,$output);
+        return $filename;
 
+    }
+    private function sanitizeString($string)
+    {
+        return utf8_decode($string);
+    }
+
+    private function generateFileName()
+    {
+        $filename = uniqid('bill_');
+        $filename .= '.pdf';
+        return $filename;
     }
 
 }

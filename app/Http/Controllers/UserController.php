@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use App\Role;
+use App\Bill;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -106,5 +108,25 @@ class UserController extends Controller
     public function destroy ($id)
     {
         //
+    }
+    /*
+     *
+     */
+    public function billsUser()
+    {
+        $user = Auth::user();
+        $result = DB::table('users')
+            ->where('users.id',$user->id)
+            ->leftjoin('courses', 'users.id', '=', 'courses.assignedOwner')
+            ->join('bills', 'courses.id', '=', 'bills.course_id')
+            ->select('bills.id')
+            ->get(['bills.id']);
+        $billIds=array();
+        foreach ($result as $bill){
+            array_push($billIds,$bill->id);
+        }
+        $bills = Bill::findMany($billIds);
+        return view('public.userBills')
+            ->with('bills', $bills);
     }
 }
