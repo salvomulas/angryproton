@@ -94,10 +94,13 @@ class InstitutionController extends Controller
         if (Gate::denies('update_institution', Institution::findOrFail($id))) {
             abort(403);
         }
-        Authorization::create($request->all());
+        $data = ['institution_id' => $id, 'role_id' => $request->role_id, 'user_id' => $request->user_id];
+        $permission = new Authorization($data);
+        $permission->save();
+        //Authorization::create($request->all());
         Session::flash('flash_message', "Die Institutionsrechte wurden erfolgreich angepasst");
         Session::flash('flash_message_type', "success");
-        return redirect()->action('InstitutionController@manage');
+        return redirect()->action('InstitutionController@manage', $id);
     }
 
     public function removePermission(Requests\PermissionRequest $request)
