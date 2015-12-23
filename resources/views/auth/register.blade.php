@@ -51,6 +51,22 @@
                         {!! Form::text('lastName', null, ['class' => 'form-control', 'placeholder' => 'Dein Nachname']) !!}
                     </div>
                     <div class="form-group">
+                        {!! Form::label('address','Adresse') !!}
+                        {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Deine Adresse']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('city','Ort') !!}
+                        {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Dein Ort']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('zip','PLZ') !!}
+                        {!! Form::text('zip', null, ['class' => 'form-control', 'placeholder' => 'Deine Postleitzahl']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('country','Land') !!}
+                        {!! Form::text('country', null, ['class' => 'form-control', 'placeholder' => 'Dein Land']) !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::label('password','Passwort') !!}
                         {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Dein gewünschtes Passwort']) !!}
                     </div>
