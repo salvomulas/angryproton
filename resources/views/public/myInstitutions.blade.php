@@ -10,7 +10,7 @@
     <div class="jumbotron">
         <div class="container">
             <div class="col-md-8 col-sm-12 col-xs-12">
-                <h3>Institutione von {{ $username }}n</h3>
+                <h3>Institutionen von {{ $username }}n</h3>
 
                 <p>Auch {{ $username }} vertraut AngryProton</p>
             </div>
